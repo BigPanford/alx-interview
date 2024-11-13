@@ -1,24 +1,26 @@
 #!/usr/bin/python3
-"""Pascal"""
+"""Generates Pascal's Triangle up to the nth row"""
 
 
 def pascal_triangle(n):
+    """
+    Returns a list of lists of integers representing the triangle.
+    """
     if n <= 0:
         return []
-    
-    triangle = [[1]]  # Starting with the first row
-    
+
+    triangle = [[1]]
+
     for i in range(1, n):
         prev_row = triangle[-1]
-        row = [1]  # Every row starts with a 1
-        # Generate the values of the row based on the previous row
-        for j in range(1, i):
-            row.append(prev_row[j - 1] + prev_row[j])
-        row.append(1)  # Every row ends with a 1
-        triangle.append(row)
-    
-    return triangle
+        new_row = [1]
 
-# Example usage:
-n = 5
-print(pascal_triangle(n))
+        # Calculate the inner elements of the new row
+        for j in range(1, i):
+            value = prev_row[j - 1] + prev_row[j]
+            new_row.append(value)
+
+        new_row.append(1)
+        triangle.append(new_row)
+
+    return triangle
